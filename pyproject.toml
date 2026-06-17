@@ -1,6 +1,14 @@
 [tool.vercel]
 entrypoint = "backend.__init__:app"
 
+[project]
+name = "employee-management-system"
+version = "0.1.0"
+description = "Employee Management System"
+requires-python = ">=3.9"
+dependencies = [
+]
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
