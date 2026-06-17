@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
-import models
+from . import models
 
 def generate_payslip_pdf(payroll: models.PayrollRecord) -> BytesIO:
     """

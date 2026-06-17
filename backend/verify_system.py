@@ -2,18 +2,16 @@ import sys
 import os
 from datetime import date, time, datetime
 
-# Add the current directory to sys.path so we can import modules correctly
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
+# Import as package modules so tests run against the package layout
 try:
-    from database import Base, engine, SessionLocal
-    import models
-    import schemas
-    import crud
-    import auth
-    import payroll_calculator
-    import payslip_generator
-    print("SUCCESS: All system files imported successfully without syntax/import errors!")
+    from .database import Base, engine, SessionLocal
+    from . import models
+    from . import schemas
+    from . import crud
+    from . import auth
+    from . import payroll_calculator
+    from . import payslip_generator
+    print("SUCCESS: All backend package files imported successfully without syntax/import errors!")
 except Exception as e:
     print(f"FAILED: Import error: {e}")
     sys.exit(1)
@@ -121,11 +119,6 @@ def run_verification():
 
         # 7. Calculate Payroll Record
         print("\n--- Step 7: Calculating Payroll for June 2026 ---")
-        # Standard: 22 working days in June
-        # Employee was: Present on Day 1 (1.0), Late on Day 2 (1.0), Half-day on Day 3 (0.5). Total Present = 2.5 days.
-        # Approved Leave = 3.0 days.
-        # Total Paid Days = 2.5 + 3.0 = 5.5 days.
-        # Unpaid days = 22 - 5.5 = 16.5 days.
         calcs = payroll_calculator.calculate_employee_payroll(
             db=db,
             employee_id=db_emp.id,

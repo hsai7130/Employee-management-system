@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from datetime import date, datetime, timedelta
 import calendar
-import models
-import crud
+from . import models
+from . import crud
 
 def calculate_monthly_days(month_str: str):
     """

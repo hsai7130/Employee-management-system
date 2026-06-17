@@ -7,13 +7,13 @@ from datetime import date, time, datetime
 from typing import List, Optional
 import os
 
-import models
-import schemas
-import crud
-import auth
-import payroll_calculator
-import payslip_generator
-from database import engine, SessionLocal, get_db
+from . import models
+from . import schemas
+from . import crud
+from . import auth
+from . import payroll_calculator
+from . import payslip_generator
+from .database import engine, SessionLocal, get_db
 
 app = FastAPI(title="Employee Management System API", version="1.0.0")
 
@@ -495,8 +495,8 @@ def download_payslip_pdf(
 
 # --- FRONTEND STATIC FILES MOUNT ---
 # StaticFiles is mounted at '/' using html=True, serving the front-end SPA dashboard.
-# We check if static directory exists first.
-static_dir = os.path.join(os.path.dirname(__file__), "static")
+# We check if static directory exists first. It lives at project root's `static`.
+static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static"))
 if not os.path.exists(static_dir):
     os.makedirs(static_dir)
 
@@ -504,4 +504,4 @@ app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)

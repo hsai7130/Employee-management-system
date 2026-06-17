@@ -5,8 +5,8 @@ import bcrypt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-import models
-import database
+from . import models
+from . import database
 
 # Secret key to sign JWT tokens. In a production app, load this from environment variables.
 SECRET_KEY = "super_secret_employee_management_system_signing_key_secure_and_long"
